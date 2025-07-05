@@ -8,11 +8,31 @@ This is a personal dotfiles repository for an Arch Linux system running omarchy.
 
 ## Architecture
 
-- **bash/aliases** - Custom bash aliases that are loaded after omarchy defaults
-- Aliases are automatically sourced by `~/.bashrc` after omarchy's defaults
+- **bash/** - Bash configuration files
+  - `aliases` - Custom bash aliases that are loaded after omarchy defaults
+  - `bashrc` - Main bash configuration that sources omarchy defaults and custom configs
+  - `bash_profile` - Bash profile configuration
+  - `bash_history` - Shared bash history
+  - `prompt` - Custom prompt configuration
+- **git/** - Git configuration files
+  - `.gitconfig` - Git configuration
+  - `.gitignore_global` - Global gitignore patterns
+  - `install.sh` - Git installation script
+- **hypr/** - Hyprland window manager configuration
+  - `hyprland.conf` - Main Hyprland configuration
+  - `hypridle.conf` - Idle daemon configuration
+- **scripts/** - Utility scripts
+  - `kbd-backlight.sh` - MacBook keyboard backlight control
+- **Makefile** - Installation and management automation
+- **keyboard-layout.md** - Documentation for keyboard layout configuration
 - The repository uses git tracking separate from omarchy to prevent conflicts
 
 ## Development Workflow
+
+### Installation
+- Run `make install` to install all configurations
+- Or install specific components: `make bash`, `make git`, `make hypr`, etc.
+- Run `make clean` to remove all symlinks and restore backups
 
 ### Adding New Aliases
 - Add custom aliases to `bash/aliases`
@@ -23,9 +43,19 @@ This is a personal dotfiles repository for an Arch Linux system running omarchy.
 - Source the aliases file: `source bash/aliases`
 - Or reload your shell session to test new aliases
 
+### Managing Configurations
+- Bash files are symlinked from the repository
+- Git configurations are symlinked to home directory
+- Hyprland configs are symlinked to appropriate config directories
+- Scripts are automatically made executable
+
 ## Key Files
 
 - `bash/aliases` - Main aliases file where all customizations go
+- `bash/bashrc` - Custom bashrc that sources omarchy defaults and dotfiles configs
+- `Makefile` - Automated installation and management
+- `scripts/kbd-backlight.sh` - Keyboard backlight control for MacBook
+- `hypr/hyprland.conf` - Custom Hyprland window manager configuration
 - `README.md` - Documentation for the repository structure and usage
 
 ## Notes
@@ -33,3 +63,7 @@ This is a personal dotfiles repository for an Arch Linux system running omarchy.
 - This repository is designed to work alongside omarchy without conflicts
 - Changes are immediately effective after sourcing or reloading the shell
 - The repository includes a Claude CLI shortcut: `ccd` for `claude --dangerously-skip-permissions`
+- The bashrc sources omarchy defaults first, then adds custom PATH for scripts
+- Custom prompt and aliases are loaded after omarchy defaults
+- Makefile handles backups of existing files during installation
+- Sudoers rule can be installed for passwordless keyboard backlight control
