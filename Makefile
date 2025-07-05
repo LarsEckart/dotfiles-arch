@@ -1,4 +1,4 @@
-.PHONY: all install bash git hypr scripts sudoers clean help
+.PHONY: all install bash git hypr waybar scripts sudoers clean help
 
 DOTFILES_DIR := $(shell pwd)
 OMARCHY_CONFIG_DIR := $(HOME)/.local/share/omarchy/config
@@ -7,7 +7,7 @@ OMARCHY_CONFIG_DIR := $(HOME)/.local/share/omarchy/config
 all: help
 
 # Install everything
-install: bash git hypr scripts sudoers
+install: bash git hypr waybar scripts sudoers
 	@echo "Installation complete!"
 	@echo "Please restart your shell or run: source ~/.bashrc"
 
@@ -104,6 +104,19 @@ hypr:
 	@ln -sf $(DOTFILES_DIR)/hypr/hypridle.conf $(OMARCHY_CONFIG_DIR)/hypr/hypridle.conf
 	@echo "  ✓ Linked hypridle.conf"
 
+# Install waybar configuration
+waybar:
+	@echo "Setting up waybar configuration..."
+	@mkdir -p $(HOME)/.config/waybar
+	
+	@# Link waybar config
+	@if [ -f $(HOME)/.config/waybar/config ] && [ ! -L $(HOME)/.config/waybar/config ]; then \
+		echo "Backing up existing waybar config..."; \
+		mv $(HOME)/.config/waybar/config $(HOME)/.config/waybar/config.backup; \
+	fi
+	@ln -sf $(DOTFILES_DIR)/waybar/config $(HOME)/.config/waybar/config
+	@echo "  ✓ Linked waybar config"
+
 # Install scripts
 scripts:
 	@echo "Setting up scripts..."
@@ -145,6 +158,12 @@ clean:
 		echo "  ✓ Removed hypridle.conf symlink"; \
 	fi
 	
+	@# Remove waybar symlinks
+	@if [ -L $(HOME)/.config/waybar/config ]; then \
+		rm $(HOME)/.config/waybar/config; \
+		echo "  ✓ Removed waybar config symlink"; \
+	fi
+	
 	@# Remove git symlinks
 	@if [ -L $(HOME)/.gitconfig ]; then \
 		rm $(HOME)/.gitconfig; \
@@ -180,6 +199,10 @@ clean:
 		mv $(HOME)/.gitignore_global.backup $(HOME)/.gitignore_global; \
 		echo "  ✓ Restored .gitignore_global from backup"; \
 	fi
+	@if [ -f $(HOME)/.config/waybar/config.backup ]; then \
+		mv $(HOME)/.config/waybar/config.backup $(HOME)/.config/waybar/config; \
+		echo "  ✓ Restored waybar config from backup"; \
+	fi
 
 # Help target
 help:
@@ -188,10 +211,11 @@ help:
 	@echo "Usage: make [target]"
 	@echo ""
 	@echo "Targets:"
-	@echo "  install   - Install all configurations (bash, git, hypr, scripts, sudoers)"
+	@echo "  install   - Install all configurations (bash, git, hypr, waybar, scripts, sudoers)"
 	@echo "  bash      - Install bash configuration files"
 	@echo "  git       - Install git configuration files"
 	@echo "  hypr      - Install Hyprland configuration"
+	@echo "  waybar    - Install waybar configuration"
 	@echo "  scripts   - Make scripts executable"
 	@echo "  sudoers   - Install sudoers rule for keyboard backlight"
 	@echo "  clean     - Remove all symlinks and restore backups"
