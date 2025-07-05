@@ -216,3 +216,94 @@ git status
 claude
 ccd
 cd dotfiles-arch/
+ccd
+claude
+ll
+ls
+claude
+nvm
+firefox
+omarchy-update all
+clear
+ls
+clear
+ls -la
+cd
+cat .bashrc 
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+claude
+ls -la
+cat .bashrc 
+cd dotfiles-arch/
+ls
+cd bash/
+ls
+n .
+ll
+claude
+ll
+cd
+ls
+ll
+clear
+ll
+which claude
+whereis claude
+which nvm
+cd
+cd dotfiles-arch/
+git status
+git add .
+git commit -m init
+git remote add origin git@github.com:LarsEckart/dotfiles-arch.git
+git branch -M main
+git push -u origin main
+make install
+cd dotfiles-arch/
+gss
+cd dotfiles-arch/
+cat keyboard-layout.md 
+clear
+cd .config/hypr/
+ll
+cd
+cd dotfiles-arch/
+ll
+cd hypr/
+ll
+touch hyprland.conf
+ll
+rm hyprland.conf 
+cp ~/.config/hypr/hyprland.conf .
+ll
+ll ~/.config/hypr/
+cat hyprland.conf 
+pwd
+..
+cat keyboard-layout.md 
+cat hypr/hyprland.conf 
+clear
+cat hypr/hyprland.conf 
+hyprctl reload
+ll
+cat keyboard-layout.md 
+ll
+cd hypr/
+cat hyprland.conf 
+ll
+cat hyprland.conf 
+clear
+ll
+..
+ll
+gss
+cd
+ll
+cd dotfiles-arch/git/
+ll
+cat .gitconfig 
+git config --global user.email lars.eckart@hey.com
+git config --global user.name Lars Eckart
+gss
+git diff
+reload

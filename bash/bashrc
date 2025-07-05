@@ -1,0 +1,8 @@
+source ~/.local/share/omarchy/default/bash/rc
+export PATH="$HOME/dotfiles-arch/scripts:$PATH"
+[ -f ~/dotfiles-arch/bash/aliases ] && source ~/dotfiles-arch/bash/aliases
+[ -f ~/dotfiles-arch/bash/prompt ] && source ~/dotfiles-arch/bash/prompt
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

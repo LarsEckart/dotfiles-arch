@@ -85,7 +85,16 @@ git:
 # Install Hyprland configuration
 hypr:
 	@echo "Setting up Hyprland configuration..."
+	@mkdir -p $(HOME)/.config/hypr
 	@mkdir -p $(OMARCHY_CONFIG_DIR)/hypr
+	
+	@# Link hyprland.conf to ~/.config/hypr/
+	@if [ -f $(HOME)/.config/hypr/hyprland.conf ] && [ ! -L $(HOME)/.config/hypr/hyprland.conf ]; then \
+		echo "Backing up existing hyprland.conf..."; \
+		mv $(HOME)/.config/hypr/hyprland.conf $(HOME)/.config/hypr/hyprland.conf.backup; \
+	fi
+	@ln -sf $(DOTFILES_DIR)/hypr/hyprland.conf $(HOME)/.config/hypr/hyprland.conf
+	@echo "  ✓ Linked hyprland.conf"
 	
 	@# Link hypridle configuration
 	@if [ -f $(OMARCHY_CONFIG_DIR)/hypr/hypridle.conf ] && [ ! -L $(OMARCHY_CONFIG_DIR)/hypr/hypridle.conf ]; then \
@@ -127,6 +136,10 @@ clean:
 	fi
 	
 	@# Remove hypr symlinks
+	@if [ -L $(HOME)/.config/hypr/hyprland.conf ]; then \
+		rm $(HOME)/.config/hypr/hyprland.conf; \
+		echo "  ✓ Removed hyprland.conf symlink"; \
+	fi
 	@if [ -L $(OMARCHY_CONFIG_DIR)/hypr/hypridle.conf ]; then \
 		rm $(OMARCHY_CONFIG_DIR)/hypr/hypridle.conf; \
 		echo "  ✓ Removed hypridle.conf symlink"; \
@@ -150,6 +163,10 @@ clean:
 	@if [ -f $(HOME)/.bash_history.backup ]; then \
 		mv $(HOME)/.bash_history.backup $(HOME)/.bash_history; \
 		echo "  ✓ Restored .bash_history from backup"; \
+	fi
+	@if [ -f $(HOME)/.config/hypr/hyprland.conf.backup ]; then \
+		mv $(HOME)/.config/hypr/hyprland.conf.backup $(HOME)/.config/hypr/hyprland.conf; \
+		echo "  ✓ Restored hyprland.conf from backup"; \
 	fi
 	@if [ -f $(OMARCHY_CONFIG_DIR)/hypr/hypridle.conf.backup ]; then \
 		mv $(OMARCHY_CONFIG_DIR)/hypr/hypridle.conf.backup $(OMARCHY_CONFIG_DIR)/hypr/hypridle.conf; \

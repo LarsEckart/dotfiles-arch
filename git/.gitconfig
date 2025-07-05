@@ -1,5 +1,7 @@
 [user]
 	useConfigOnly = true
+	email = lars.eckart@hey.com
+	name = Lars
 
 [core]
 	excludesfile = ~/.gitignore_global
