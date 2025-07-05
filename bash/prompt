@@ -1,0 +1,62 @@
+#!/bin/bash
+# Bash prompt configuration similar to the zsh prompt
+
+# Function to get git branch and status
+prompt_git_info() {
+    # Check if we're in a git repository
+    if git rev-parse --git-dir > /dev/null 2>&1; then
+        # Get the current branch name
+        local branch=$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --exact-match 2>/dev/null || git rev-parse --short HEAD 2>/dev/null)
+        
+        # Initialize status string
+        local status=""
+        
+        # Check for various git states
+        # Untracked files
+        if [[ -n $(git ls-files --others --exclude-standard 2>/dev/null) ]]; then
+            status="${status}?"
+        fi
+        
+        # Stashed files
+        if git rev-parse --verify refs/stash &>/dev/null; then
+            status="${status}$"
+        fi
+        
+        # Modified files (unstaged)
+        if ! git diff --quiet 2>/dev/null; then
+            status="${status}!"
+        fi
+        
+        # Staged files
+        if ! git diff --cached --quiet 2>/dev/null; then
+            status="${status}+"
+        fi
+        
+        # Output the branch and status
+        if [[ -n "$status" ]]; then
+            echo " on ${branch}[${status}]"
+        else
+            echo " on ${branch}"
+        fi
+    fi
+}
+
+# Set the prompt
+set_bash_prompt() {
+    # Colors
+    local RESET='\[\033[0m\]'
+    local BOLD='\[\033[1m\]'
+    local GREEN='\[\033[32m\]'
+    local BLUE='\[\033[34m\]'
+    local CYAN='\[\033[36m\]'
+    local YELLOW='\[\033[33m\]'
+    
+    # Time in HH:MM format
+    local TIME='\[\033[90m\][\t]\[\033[0m\]'
+    
+    # Build the prompt
+    PS1="${TIME} ${BLUE}${BOLD}\w${RESET}${YELLOW}\$(prompt_git_info)${RESET}\n\$ "
+}
+
+# Apply the prompt
+set_bash_prompt

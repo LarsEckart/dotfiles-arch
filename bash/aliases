@@ -1,0 +1,18 @@
+# Personal bash aliases
+# This file contains custom aliases that override or extend omarchy defaults
+
+# File listing
+alias l='ls --color=auto'
+alias ll='ls -alF --color=auto'
+
+# Navigation
+alias ..='cd ..'
+
+# Git aliases
+alias gss='git status -s'
+alias gc='git clone --recurse-submodules'
+alias gcr='git commit --amend -m'
+alias gcl='git branch --merged | grep -v \* | xargs -n 1 git branch -d'
+
+# Claude CLI shortcut
+alias ccd='claude --dangerously-skip-permissions'

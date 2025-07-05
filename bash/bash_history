@@ -1,0 +1,218 @@
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+nvm 
+nvm install ==lts
+nvm install --lts
+npm install -g @anthropic-ai/claude-code
+claude
+ls
+./install-macbook-webcam-firmware.sh 
+sudo ./install-macbook-webcam-firmware.sh 
+cd dotfiles-arch/
+ccd
+./wifi_setup.sh 
+sudo ./wifi_setup.sh 
+sudo pacman -S iw wpa_supplicant dhcpcd
+./wifi_manager.sh 
+sudo iw dev wlp3s0 scan | grep SSID
+sudo wpa_supplicant -B -i wlp3s0 -c /tmp/wpa_supplicant.conf
+sudo dhcpcd wlp3s0
+./wifi_manager.sh 
+sudo killall wpa_supplicant
+iwctl
+sudo pacman -S iwd
+iwctl
+sudo systemctl stop wpa_supplicant
+sudo systemctl start iwd
+ls
+rm -rf network_analyzer.sh 
+rm -rf wifi_manager.sh 
+rm -rf wifi_setup.sh 
+ls
+cat .bashrc 
+ls
+cd dotfiles-arch/
+ls
+ls -la
+claude
+claude
+sudo claude --dangerously-skip-permissions
+claude --dangerously-skip-permissions
+clear
+ls
+ccd
+sudo echo 100 > /sys/class/leds/smc::kbd_backlight/brightnes
+sudo sh -c 'echo 100 > /sys/class/leds/smc::kbd_backlight/brightness'
+ls
+cat keyboard-backlight.md 
+clear
+ls
+cat macbook-function-keys.md 
+setxkbmap gb
+clear
+hyprctl keyword input:kb_layout gb
+zed
+ls
+cd Documents/
+zed .
+env -u WAYLAND_DISPLAY zed
+ps
+neovim
+sudo localectl set-x11-keymap se
+s
+ls
+gh auth
+gh auth login
+ls
+cd dotfiles-arch/
+ls
+cd bash/
+ls
+cat aliases 
+clear
+ls
+cd
+ls
+ls +la
+ls -la
+curl -f https://zed.dev/install.sh | sh
+zed
+ls
+cd Pictures/cd
+clear
+ls
+ls -la
+ls .config/
+~/.local/bin/zed zed --uninstall
+ls
+cat CLAUDE.md 
+clear
+cat CLAUDE.md 
+sudo pacman -Rns dropbox dropbox-cli
+rm -rf ~/.dropbox ~/.dropbox-dist
+ls
+cd dotfiles-arch/
+sudo pacman -S firefox
+clear
+sudo pacman -S firefox
+sudo
+sudo echo hi
+sudo whoami
+sudo echo "hi"
+ls
+sudo pacman -S firefox
+firefox --version
+hyprctl reload
+firefox --new-window
+hyprctl reload
+cat ~/.config/hypr/hyprland.conf
+hyprctl reload
+claude
+ccd
+clear
+~/.local/share/omarchy
+omarchy-update
+ccd
+omarchy-update
+sudo systemctl enable --now iwd
+firefox
+hyprctl reload
+ccd
+hyprctl reloa
+hyprctl reload
+ls .ssh/
+ll
+ls
+ls
+ccd
+cd .dotfiles/
+ls
+cd install/
+ls
+./install-arch.sh 
+neo ~/.bashrc
+neov ~/.bashrc
+n ~/.bashrc
+ll
+cd .dotfiles/
+ls
+cd install/
+ls
+./install-shared.sh 
+cd
+clear
+ls -la
+ll
+cat .aliases 
+gcl
+ls
+ll
+ls -la
+cd dotfiles-arch/
+n .
+ls
+cd dotfiles-arch/
+ls
+make install
+sudo rm /etc/sudoers.d/kbd-backlight
+ls
+make install.sh 
+make install
+ll
+ccd
+cd .dotfiles/
+ccd
+ls
+ls -a
+cat Makefile 
+ls -la
+git checkkout main
+git checkout main
+git branch
+git checkout master
+ll
+ls
+cd
+ll
+ls -la
+..
+cd
+claude
+ll
+ls
+l
+ll
+la
+l
+ll
+l
+cd dotfiles-arch/
+n .
+ls
+cd dotfiles-arch/
+claude
+ll
+cd dotfiles-arch/
+lars.eckart
+git conf --global --list
+git config --global --list
+l
+ll
+ls git
+..
+ll
+clear
+ll
+cd dotfiles-arch/
+ll
+cd git/
+ll
+git config --global --list
+source ~/.local/share/omarchy/install/2-identification.sh
+source ~/.local/share/omarchy/install/4-config.sh
+cd dotfiles-arch/
+ll
+ls
+git status
+claude
+ccd
+cd dotfiles-arch/
