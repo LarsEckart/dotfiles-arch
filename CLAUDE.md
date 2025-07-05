@@ -6,6 +6,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a personal dotfiles repository for an Arch Linux system running omarchy. The repository contains customizations that extend/override omarchy defaults without causing conflicts during system updates.
 
+### Core Philosophy
+
+The fundamental approach is:
+1. **All configuration lives in this repository** - No direct editing of system config files
+2. **Symlink everything** - Configuration files are symlinked from this repo to where the system expects them
+3. **Omarchy first, customizations second** - Always source omarchy defaults first, then layer customizations on top
+4. **Non-destructive** - The Makefile backs up existing configs before creating symlinks
+
+This ensures clean separation between omarchy's base configuration and personal customizations, making updates seamless and configurations portable.
+
 ## Architecture
 
 - **bash/** - Bash configuration files
@@ -48,6 +58,12 @@ This is a personal dotfiles repository for an Arch Linux system running omarchy.
 - Git configurations are symlinked to home directory
 - Hyprland configs are symlinked to appropriate config directories
 - Scripts are automatically made executable
+
+### Configuration Loading Order
+1. **bashrc**: Sources `~/.local/share/omarchy/default/bash/rc` first
+2. Then adds custom PATH for scripts
+3. Then sources custom aliases and prompt
+4. This ensures omarchy defaults are always loaded before customizations
 
 ## Key Files
 
