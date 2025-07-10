@@ -1,4 +1,4 @@
-.PHONY: all install bash git hypr waybar scripts sudoers clean help
+.PHONY: all install bash git hypr waybar scripts sudoers battery clean help
 
 DOTFILES_DIR := $(shell pwd)
 OMARCHY_CONFIG_DIR := $(HOME)/.local/share/omarchy/config
@@ -7,7 +7,7 @@ OMARCHY_CONFIG_DIR := $(HOME)/.local/share/omarchy/config
 all: help
 
 # Install everything
-install: bash git hypr waybar scripts sudoers
+install: bash git hypr waybar scripts sudoers battery
 	@echo "Installation complete!"
 	@echo "Please restart your shell or run: source ~/.bashrc"
 
@@ -43,6 +43,12 @@ bash:
 	@if ! grep -q "dotfiles-arch/bash/aliases" $(HOME)/.bashrc; then \
 		echo "  ✓ Adding aliases source to .bashrc"; \
 		echo '[ -f ~/dotfiles-arch/bash/aliases ] && source ~/dotfiles-arch/bash/aliases' >> $(HOME)/.bashrc; \
+	fi
+	
+	@# Add .secrets source to .bashrc if not present
+	@if ! grep -q "dotfiles-arch/.secrets" $(HOME)/.bashrc; then \
+		echo "  ✓ Adding .secrets source to .bashrc"; \
+		echo '[ -f ~/dotfiles-arch/.secrets ] && source ~/dotfiles-arch/.secrets' >> $(HOME)/.bashrc; \
 	fi
 
 # Install git configuration
@@ -135,6 +141,11 @@ sudoers:
 		echo "  ✓ Sudoers rule already exists"; \
 	fi
 
+# Install battery notifications
+battery:
+	@echo "Installing battery notifications..."
+	@./install-battery-notifications.sh
+
 # Remove all symlinks
 clean:
 	@echo "Removing symlinks..."
@@ -211,13 +222,14 @@ help:
 	@echo "Usage: make [target]"
 	@echo ""
 	@echo "Targets:"
-	@echo "  install   - Install all configurations (bash, git, hypr, waybar, scripts, sudoers)"
+	@echo "  install   - Install all configurations (bash, git, hypr, waybar, scripts, sudoers, battery)"
 	@echo "  bash      - Install bash configuration files"
 	@echo "  git       - Install git configuration files"
 	@echo "  hypr      - Install Hyprland configuration"
 	@echo "  waybar    - Install waybar configuration"
 	@echo "  scripts   - Make scripts executable"
 	@echo "  sudoers   - Install sudoers rule for keyboard backlight"
+	@echo "  battery   - Install battery notification system"
 	@echo "  clean     - Remove all symlinks and restore backups"
 	@echo "  help      - Show this help message"
 	@echo ""

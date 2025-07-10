@@ -16,3 +16,6 @@ alias gcl='git branch --merged | grep -v \* | xargs -n 1 git branch -d'
 
 # Claude CLI shortcut
 alias ccd='claude --dangerously-skip-permissions'
+
+# Gemini CLI shortcut
+alias gemini-yolo='gemini --yolo'
