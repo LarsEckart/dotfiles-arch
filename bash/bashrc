@@ -2,4 +2,3 @@ source ~/.local/share/omarchy/default/bash/rc
 [ -f ~/dotfiles-arch/bash/exports ] && source ~/dotfiles-arch/bash/exports
 [ -f ~/dotfiles-arch/.secrets ] && source ~/dotfiles-arch/.secrets
 [ -f ~/dotfiles-arch/bash/aliases ] && source ~/dotfiles-arch/bash/aliases
-[ -f ~/dotfiles-arch/bash/prompt ] && source ~/dotfiles-arch/bash/prompt

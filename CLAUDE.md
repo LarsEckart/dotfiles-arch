@@ -16,6 +16,42 @@ The fundamental approach is:
 
 This ensures clean separation between omarchy's base configuration and personal customizations, making updates seamless and configurations portable.
 
+## How to Override Without Losing Changes
+
+Understanding omarchy's file structure is crucial for safe customization:
+
+- **`~/.config/`** - Your customization files (safe from updates, considered YOUR files)
+- **`~/.local/share/omarchy/`** - Omarchy's internal files (don't edit directly, will be overwritten during updates)
+
+### Best Practices
+
+1. **Never edit files in `~/.local/share/omarchy/` directly**
+   - Changes there will be overwritten during omarchy updates
+   - If updates do touch them, your changes are saved to `.bak` files
+
+2. **Always put customizations in `~/.config/`**
+   - These files are protected from omarchy updates
+   - Override omarchy defaults by setting values here
+   - This repository symlinks to these safe locations
+
+3. **Use the Omarchy Menu for config edits**
+   - Press `Super + Alt + Space` → Setup > Configs > [process]
+   - Opens configs in Neovim and auto-restarts processes after saving
+   - Ensures proper reload handling
+
+### Key Override Locations
+
+- `~/.config/hypr/hyprland.conf` - Hyprland keybindings and settings
+- `~/.config/hypr/input.conf` - Keyboard/mouse/trackpad configuration
+- `~/.config/waybar/config.jsonc` - Status bar configuration
+- `~/.config/starship.toml` - Shell prompt customization
+- `~/.bashrc` - Bash configuration (home directory)
+
+### Recovery Options
+
+- **Individual config restore**: `Super + Alt + Space` → Update > Config
+- **Full reset**: Run `omarchy-reinstall` to restore all defaults
+
 ## Architecture
 
 - **bash/** - Bash configuration files

@@ -1,4 +1,4 @@
-.PHONY: all install bash git hypr waybar scripts sudoers battery clean help
+.PHONY: all install bash git hypr waybar scripts sudoers clean help
 
 DOTFILES_DIR := $(shell pwd)
 OMARCHY_CONFIG_DIR := $(HOME)/.local/share/omarchy/config
@@ -7,7 +7,7 @@ OMARCHY_CONFIG_DIR := $(HOME)/.local/share/omarchy/config
 all: help
 
 # Install everything
-install: bash git hypr waybar scripts sudoers battery
+install: bash git hypr waybar scripts sudoers
 	@echo "Installation complete!"
 	@echo "Please restart your shell or run: source ~/.bashrc"
 
@@ -16,7 +16,15 @@ bash:
 	@echo "Setting up bash configuration..."
 	@# Create bash directory if it doesn't exist
 	@mkdir -p $(DOTFILES_DIR)/bash
-	
+
+	@# Link bashrc
+	@if [ -f $(HOME)/.bashrc ] && [ ! -L $(HOME)/.bashrc ]; then \
+		echo "Backing up existing .bashrc..."; \
+		mv $(HOME)/.bashrc $(HOME)/.bashrc.backup; \
+	fi
+	@ln -sf $(DOTFILES_DIR)/bash/bashrc $(HOME)/.bashrc
+	@echo "  ✓ Linked .bashrc"
+
 	@# Link bash_profile
 	@if [ -f $(HOME)/.bash_profile ] && [ ! -L $(HOME)/.bash_profile ]; then \
 		echo "Backing up existing .bash_profile..."; \
@@ -24,7 +32,7 @@ bash:
 	fi
 	@ln -sf $(DOTFILES_DIR)/bash/bash_profile $(HOME)/.bash_profile
 	@echo "  ✓ Linked .bash_profile"
-	
+
 	@# Link bash_history
 	@if [ -f $(HOME)/.bash_history ] && [ ! -L $(HOME)/.bash_history ]; then \
 		echo "Backing up existing .bash_history..."; \
@@ -32,24 +40,6 @@ bash:
 	fi
 	@ln -sf $(DOTFILES_DIR)/bash/bash_history $(HOME)/.bash_history
 	@echo "  ✓ Linked .bash_history"
-	
-	@# Add PATH export to .bashrc if not present
-	@if ! grep -q "dotfiles-arch/scripts" $(HOME)/.bashrc; then \
-		echo "  ✓ Adding scripts to PATH in .bashrc"; \
-		echo 'export PATH="$$HOME/dotfiles-arch/scripts:$$PATH"' >> $(HOME)/.bashrc; \
-	fi
-	
-	@# Add aliases source to .bashrc if not present
-	@if ! grep -q "dotfiles-arch/bash/aliases" $(HOME)/.bashrc; then \
-		echo "  ✓ Adding aliases source to .bashrc"; \
-		echo '[ -f ~/dotfiles-arch/bash/aliases ] && source ~/dotfiles-arch/bash/aliases' >> $(HOME)/.bashrc; \
-	fi
-	
-	@# Add .secrets source to .bashrc if not present
-	@if ! grep -q "dotfiles-arch/.secrets" $(HOME)/.bashrc; then \
-		echo "  ✓ Adding .secrets source to .bashrc"; \
-		echo '[ -f ~/dotfiles-arch/.secrets ] && source ~/dotfiles-arch/.secrets' >> $(HOME)/.bashrc; \
-	fi
 
 # Install git configuration
 git:
@@ -141,15 +131,14 @@ sudoers:
 		echo "  ✓ Sudoers rule already exists"; \
 	fi
 
-# Install battery notifications
-battery:
-	@echo "Installing battery notifications..."
-	@./install-battery-notifications.sh
-
 # Remove all symlinks
 clean:
 	@echo "Removing symlinks..."
 	@# Remove bash symlinks
+	@if [ -L $(HOME)/.bashrc ]; then \
+		rm $(HOME)/.bashrc; \
+		echo "  ✓ Removed .bashrc symlink"; \
+	fi
 	@if [ -L $(HOME)/.bash_profile ]; then \
 		rm $(HOME)/.bash_profile; \
 		echo "  ✓ Removed .bash_profile symlink"; \
@@ -186,6 +175,10 @@ clean:
 	fi
 	
 	@# Restore backups if they exist
+	@if [ -f $(HOME)/.bashrc.backup ]; then \
+		mv $(HOME)/.bashrc.backup $(HOME)/.bashrc; \
+		echo "  ✓ Restored .bashrc from backup"; \
+	fi
 	@if [ -f $(HOME)/.bash_profile.backup ]; then \
 		mv $(HOME)/.bash_profile.backup $(HOME)/.bash_profile; \
 		echo "  ✓ Restored .bash_profile from backup"; \
@@ -222,14 +215,13 @@ help:
 	@echo "Usage: make [target]"
 	@echo ""
 	@echo "Targets:"
-	@echo "  install   - Install all configurations (bash, git, hypr, waybar, scripts, sudoers, battery)"
+	@echo "  install   - Install all configurations (bash, git, hypr, waybar, scripts, sudoers)"
 	@echo "  bash      - Install bash configuration files"
 	@echo "  git       - Install git configuration files"
 	@echo "  hypr      - Install Hyprland configuration"
 	@echo "  waybar    - Install waybar configuration"
 	@echo "  scripts   - Make scripts executable"
 	@echo "  sudoers   - Install sudoers rule for keyboard backlight"
-	@echo "  battery   - Install battery notification system"
 	@echo "  clean     - Remove all symlinks and restore backups"
 	@echo "  help      - Show this help message"
 	@echo ""
