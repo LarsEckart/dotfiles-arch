@@ -8,6 +8,16 @@ alias ll='ls -alF --color=auto'
 # Navigation
 alias ..='cd ..'
 
+# Create directory and change into it
+mkd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Reload bash configuration
+reload() {
+    source ~/.bashrc && echo "Configuration reloaded!"
+}
+
 # Git aliases
 alias gss='git status -s'
 alias gc='git clone --recurse-submodules'
