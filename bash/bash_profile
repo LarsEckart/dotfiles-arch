@@ -1,1 +1,5 @@
+# Source bashrc for login shells
+[[ -f ~/.bashrc ]] && source ~/.bashrc
+
+# Auto-start Hyprland on tty1
 [[ -z $DISPLAY && $(tty) == /dev/tty1 ]] && exec Hyprland
