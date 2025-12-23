@@ -1,0 +1,12 @@
+[Unit]
+Description=Auto keyboard backlight based on ambient light sensor
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/home/lars/dotfiles-arch/scripts/kbd-backlight-auto.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
