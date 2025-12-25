@@ -105,13 +105,13 @@ waybar:
 	@echo "Setting up waybar configuration..."
 	@mkdir -p $(HOME)/.config/waybar
 	
-	@# Link waybar config
-	@if [ -f $(HOME)/.config/waybar/config ] && [ ! -L $(HOME)/.config/waybar/config ]; then \
-		echo "Backing up existing waybar config..."; \
-		mv $(HOME)/.config/waybar/config $(HOME)/.config/waybar/config.backup; \
+	@# Link waybar config.jsonc
+	@if [ -f $(HOME)/.config/waybar/config.jsonc ] && [ ! -L $(HOME)/.config/waybar/config.jsonc ]; then \
+		echo "Backing up existing waybar config.jsonc..."; \
+		mv $(HOME)/.config/waybar/config.jsonc $(HOME)/.config/waybar/config.jsonc.backup; \
 	fi
-	@ln -sf $(DOTFILES_DIR)/waybar/config $(HOME)/.config/waybar/config
-	@echo "  ✓ Linked waybar config"
+	@ln -sf $(DOTFILES_DIR)/waybar/config.jsonc $(HOME)/.config/waybar/config.jsonc
+	@echo "  ✓ Linked waybar config.jsonc"
 
 # Install scripts
 scripts:
@@ -159,9 +159,9 @@ clean:
 	fi
 	
 	@# Remove waybar symlinks
-	@if [ -L $(HOME)/.config/waybar/config ]; then \
-		rm $(HOME)/.config/waybar/config; \
-		echo "  ✓ Removed waybar config symlink"; \
+	@if [ -L $(HOME)/.config/waybar/config.jsonc ]; then \
+		rm $(HOME)/.config/waybar/config.jsonc; \
+		echo "  ✓ Removed waybar config.jsonc symlink"; \
 	fi
 	
 	@# Remove git symlinks
@@ -203,9 +203,9 @@ clean:
 		mv $(HOME)/.gitignore_global.backup $(HOME)/.gitignore_global; \
 		echo "  ✓ Restored .gitignore_global from backup"; \
 	fi
-	@if [ -f $(HOME)/.config/waybar/config.backup ]; then \
-		mv $(HOME)/.config/waybar/config.backup $(HOME)/.config/waybar/config; \
-		echo "  ✓ Restored waybar config from backup"; \
+	@if [ -f $(HOME)/.config/waybar/config.jsonc.backup ]; then \
+		mv $(HOME)/.config/waybar/config.jsonc.backup $(HOME)/.config/waybar/config.jsonc; \
+		echo "  ✓ Restored waybar config.jsonc from backup"; \
 	fi
 
 # Help target

@@ -1,5 +1,12 @@
+# Omarchy environment (must be before sourcing omarchy defaults)
+export OMARCHY_PATH="$HOME/.local/share/omarchy"
+export PATH="$OMARCHY_PATH/bin:$PATH"
+
 source ~/.local/share/omarchy/default/bash/rc
 [ -f ~/dotfiles-arch/bash/exports ] && source ~/dotfiles-arch/bash/exports
 [ -f ~/dotfiles-arch/.secrets ] && source ~/dotfiles-arch/.secrets
 [ -f ~/dotfiles-arch/bash/aliases ] && source ~/dotfiles-arch/bash/aliases
 . "$HOME/.local/share/../bin/env"
+
+# opencode
+export PATH=/home/lars/.opencode/bin:$PATH
